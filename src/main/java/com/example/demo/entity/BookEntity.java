@@ -3,17 +3,32 @@ package com.example.demo.entity;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "TB_BOOK", schema = "public")
 public class BookEntity implements Serializable{
 
 
 	private static final long serialVersionUID = 1L;
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "ID")
 	private Long id;
 	
+	@Column(name = "NAME")
 	private String name;
+	@Column(name = "GENDER")
 	private String gender;
+	@Column(name = "DATE")
 	private LocalDate date;
-	private WriterEntity bookWrier;
+	@Column(name = "PRICE")
 	private Double price;
 	
 	public Long getId() {
@@ -39,12 +54,6 @@ public class BookEntity implements Serializable{
 	}
 	public void setDate(LocalDate date) {
 		this.date = date;
-	}
-	public WriterEntity getBookWrier() {
-		return bookWrier;
-	}
-	public void setBookWrier(WriterEntity bookWrier) {
-		this.bookWrier = bookWrier;
 	}
 	public Double getPrice() {
 		return price;
