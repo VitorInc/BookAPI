@@ -4,13 +4,28 @@ import java.time.LocalDate;
 
 public class BookVO {
 
-
 	private String nameVO;
 	private String genderVO;
 	private LocalDate dateVO;
 	private Double priceVO;
+	private String languageVO;
+	private String authorVO;
 
+	public String getLanguageVO() {
+		return languageVO;
+	}
 
+	public void setLanguageVO(String languageVO) {
+		this.languageVO = languageVO;
+	}
+
+	public String getAuthorVO() {
+		return authorVO;
+	}
+
+	public void setAuthorVO(String authorVO) {
+		this.authorVO = authorVO;
+	}
 
 	public String getNameVO() {
 		return nameVO;

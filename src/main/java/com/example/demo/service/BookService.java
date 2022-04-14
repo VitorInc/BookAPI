@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import com.example.demo.entity.BookEntity;
 import com.example.demo.exception.NaoEncontradoException;
 import com.example.demo.repository.BookRepository;
-import com.example.demo.vo.BookBasicDataVO;
+import com.example.demo.specification.BookSpecification;
+import com.example.demo.vo.BookFilterVO;
+import com.example.demo.vo.BookResumeVO;
 import com.example.demo.vo.BookVO;
 
 @Service
@@ -34,9 +36,15 @@ public class BookService {
 	}
 
 	
-	public Page<BookBasicDataVO> bookFilteredResearch(Pageable p, BookBasicDataVO basicDataVO){
+	public Page<BookResumeVO> bookFilteredResearch(Pageable p, BookFilterVO filter){
 		
-		return null;
+		log.info("SEARCH WITH FILTER\n");
+		
+		Page<BookEntity> filtered = bookRepository.findAll(new BookSpecification(filter), p);
+		log.info("SEARCH WITH SUCCESSFUL\n");
+
+		
+		return filtered.map(this::convertResumeToVO);
 	}
 
 	public BookVO savingBook(BookVO vo) {
@@ -55,8 +63,10 @@ public class BookService {
 		log.info("CONVERTING ENTITY TO VO");
 		vo.setDateVO(entity.getDate());
 		vo.setNameVO(entity.getName());
-		vo.setGenderVO(entity.getGender());
+		vo.setGenderVO(entity.getGenre());
 		vo.setPriceVO(entity.getPrice());
+		vo.setAuthorVO(entity.getAuthor());
+		vo.setLanguageVO(entity.getLanguage());
 		
 		log.info("CONVERTION DONE!");
 
@@ -70,13 +80,25 @@ public class BookService {
 		
 		entity.setName(vo.getNameVO());
 		entity.setPrice(vo.getPriceVO());
-		entity.setGender(vo.getGenderVO());
+		entity.setGenre(vo.getGenderVO());
 		entity.setPrice(vo.getPriceVO());
+		entity.setLanguage(vo.getLanguageVO());
+		entity.setAuthor(vo.getAuthorVO());
 		
 		log.info("CONVERTION DONE!");
 
 		return entity;
 		
+	}
+	
+	public BookResumeVO convertResumeToVO(BookEntity entity) {
+		BookResumeVO vo = new BookResumeVO();
+		
+		vo.setNameVO(entity.getName());
+		vo.setGenreVO(entity.getGenre());
+		vo.setAuthorVO(entity.getAuthor());
+		
+		return vo;
 	}
 	
 	
