@@ -4,20 +4,13 @@ import java.time.LocalDate;
 
 public class BookVO {
 
-	private Long idVO;
 
 	private String nameVO;
 	private String genderVO;
 	private LocalDate dateVO;
 	private Double priceVO;
 
-	public Long getIdVO() {
-		return idVO;
-	}
 
-	public void setIdVO(Long idVO) {
-		this.idVO = idVO;
-	}
 
 	public String getNameVO() {
 		return nameVO;

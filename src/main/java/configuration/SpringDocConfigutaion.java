@@ -11,10 +11,8 @@ public class SpringDocConfigutaion {
 	@Bean
 	public GroupedOpenApi swagger() {
 		return GroupedOpenApi.builder()
-				.group("br.gov.sp.prodesp.saa")
+				.group("com.example.demo")
 				.packagesToScan("com.example.demo.controller")
 				.build();
 	}
-
-
 }
